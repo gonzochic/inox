@@ -1,0 +1,28 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="/public/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <script src="/public/js/jquery.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../public/js/config.js"></script>
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div id="react-content">
+  </div>
+
+</div>
+
+  <script>
+    System['import']('public/js/components/<%= pagename %>')
+  </script>
+
+</body>
+</html>
