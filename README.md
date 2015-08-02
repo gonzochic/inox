@@ -46,6 +46,13 @@ Now you can start the Backend Server which is also serving the client content:
 $ node server.js
 ```
 
+### Configuration
+
+We are using the dotenv module to set the environment. Simply create a `.env` file containing following variables:
+* SECRET : Secret for the password encryption (default: enteryoursecrethere)
+* DB_URL : Url to the MongoDB instance (default: mongodb://localhost:27017/inox)
+* PORT : Port of the backend server (default: 8080)
+
 ### Generate test-data
 
 When you are developing the project it might be useful the create some dummy test-data. We supplied you with a test-data generator:
