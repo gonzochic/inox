@@ -33,14 +33,15 @@ export default class Overview extends React.Component {
 
           return (
             <Entry
-              key={entry._id}
+              ref={"entry" + entry._id}
+              key={new Date(entry.issued).getTime()}
               entryId = {entry._id}
               content={entry.content}
               authorName = {entry.authorName}
               comments = {entry.comments}
               tags = {entry.tags}
               issued = {entry.issued}
-              showFooter = {true}
+              showFeedOrigin = {true}
               feedId = {entry.feed}
               feedTitle = {entry.feedName}
               likes = {numberOfLikes}

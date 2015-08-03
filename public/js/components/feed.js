@@ -68,6 +68,9 @@ export default class Feed extends React.Component {
         />
 
         {this.state.entries.map(function(entry) {
+          const numberOfLikes = entry.likes.length;
+          const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1
+
           return (
             <Entry
               ref={"entry" + entry._id}
@@ -77,6 +80,8 @@ export default class Feed extends React.Component {
               comments = {entry.comments}
               tags = {entry.tags}
               issued = {entry.issued}
+              likes = {numberOfLikes}
+              likedByUser = {likedByUser}
             />
           );
         })}

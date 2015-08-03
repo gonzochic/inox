@@ -20,27 +20,17 @@ export default class Entry extends React.Component {
   }
 
   render() {
-    let footer = null;
+    let feedOrigin = null;
 
-    if (this.props.showFooter) {
-      footer = (
-        <div className='panel-footer'>
-          <div className='row'>
-            <div className='col-xs-12'>
-              <span className='pull-left'>
-                Likes: {this.state.likes}
-                <button onClick={() => this.onLikeClick()} disabled={this.state.likedByUser}> Like </button>
-              </span>
-              <span className='pull-right'>
-                <span>From </span>
-                <FeedLink
-                  feedId = {this.props.feedId}
-                  feedTitle = {this.props.feedTitle}
-                />
-              </span>
-            </div>
-          </div>
-        </div>
+    if (this.props.showFeedOrigin) {
+      feedOrigin = (
+        <span className='pull-right'>
+          <span>From </span>
+          <FeedLink
+            feedId = {this.props.feedId}
+            feedTitle = {this.props.feedTitle}
+          />
+        </span>
       );
     }
 
@@ -59,7 +49,17 @@ export default class Entry extends React.Component {
         <div className='panel-body'>
           {this.props.content}
         </div>
-        {footer}
+        <div className='panel-footer'>
+          <div className='row'>
+            <div className='col-xs-12'>
+              <span className='pull-left'>
+                Likes: {this.state.likes}
+                <button onClick={() => this.onLikeClick()} disabled={this.state.likedByUser}> Like </button>
+              </span>
+              {feedOrigin}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -74,7 +74,7 @@ Entry.propTypes = {
   issued : React.PropTypes.string,
   feedId: React.PropTypes.string,
   feedTitle: React.PropTypes.string,
-  showFooter: React.PropTypes.bool,
+  showFeedOrigin: React.PropTypes.bool,
   likes: React.PropTypes.number,
   likedByUser: React.PropTypes.bool
 }
@@ -88,7 +88,7 @@ Entry.defaultProps = {
   issued : '',
   feedId: '',
   feedTitle: '',
-  showFooter: false,
+  showFeedOrigin: false,
   likes: 0,
   likedByUser: false
 }
