@@ -14,7 +14,7 @@ export default class FeedList extends React.Component {
                 this.props.feeds.map(function(feed) {
                   return (
                     <FeedLink
-                      //ref={feed._id}
+                      key={feed._id}
                       feedId={feed._id}
                       feedTitle= {feed.title}
                     />
