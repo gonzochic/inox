@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from 'public/js/components/avatar'
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ export default class Navbar extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               <li>
                 <a href={"/pages/#/profiles/" + this.props.profileId}>
+                  <Avatar name={this.props.profileName} />
                   {this.props.profileName}
                 </a>
               </li>
