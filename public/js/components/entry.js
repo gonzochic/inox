@@ -1,5 +1,7 @@
 import React from 'react';
 import FeedLink from 'public/js/components/feedlink';
+import Avatar from 'public/js/components/avatar'
+
 import RestApi from 'public/js/components/restapi';
 import profileData from 'public/js/helper/profiledata';
 
@@ -41,6 +43,7 @@ export default class Entry extends React.Component {
             <div className="col-xs-6">
               <label className="pull-left">
                 <a href = {'/pages/#/profiles/' + this.props.authorId}>
+                  <Avatar name={this.props.authorName} />
                   {this.props.authorName}
                 </a>
               </label>
