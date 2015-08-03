@@ -45,7 +45,7 @@ React.render((
     <Route path="/" component={App}>
       <Route path="overview" component={Overview}/>
       <Route path="entries/:id" component={Feed}/>
-      <Route path="profile/:id" component={Profile} />
+      <Route path="profiles/:id" component={Profile} />
     </Route>
   </Router>
 ), document.getElementById('react-content'));

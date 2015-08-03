@@ -22,7 +22,7 @@ export default class Navbar extends React.Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a href={"/pages/#/profile/" + this.props.profileId}>
+                <a href={"/pages/#/profiles/" + this.props.profileId}>
                   {this.props.profileName}
                 </a>
               </li>

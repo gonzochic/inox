@@ -37,6 +37,7 @@ export default class Overview extends React.Component {
               key={new Date(entry.issued).getTime()}
               entryId = {entry._id}
               content={entry.content}
+              authorId= {entry.author}
               authorName = {entry.authorName}
               comments = {entry.comments}
               tags = {entry.tags}

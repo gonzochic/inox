@@ -39,7 +39,11 @@ export default class Entry extends React.Component {
         <div className = 'panel-heading'>
           <div className="row">
             <div className="col-xs-6">
-              <label className="pull-left">{this.props.authorName}</label>
+              <label className="pull-left">
+                <a href = {'/pages/#/profiles/' + this.props.authorId}>
+                  {this.props.authorName}
+                </a>
+              </label>
             </div>
             <div className="col-xs-6">
               <label className="pull-right">{new Date(this.props.issued).toUTCString()}</label>
@@ -68,6 +72,7 @@ export default class Entry extends React.Component {
 Entry.propTypes = {
   entryId: React.PropTypes.string,
   content: React.PropTypes.string,
+  authorId: React.PropTypes.string,
   authorName : React.PropTypes.string,
   comments : React.PropTypes.array,
   tags : React.PropTypes.array,
@@ -82,6 +87,7 @@ Entry.propTypes = {
 Entry.defaultProps = {
   entryId: '',
   content: '',
+  authorId: '',
   authorName : 'Default name',
   comments : 'Default comment',
   tags : [],
