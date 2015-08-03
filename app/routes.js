@@ -4,6 +4,7 @@ var entriesRoute = require('./routes/entries');
 var feedsRoute = require('./routes/feeds');
 var pagesRoute = require('./routes/pages');
 var profileRoute = require('./routes/profiles');
+var embedsRoute = require('./routes/embeds');
 
 module.exports = function(app, passport) {
 
@@ -12,5 +13,6 @@ module.exports = function(app, passport) {
   app.use('/feeds', feedsRoute(passport));
   app.use('/pages', pagesRoute(passport));
   app.use('/profiles',profileRoute(passport));
+  app.use('/embeds',embedsRoute(passport));
 
 };

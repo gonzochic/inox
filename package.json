@@ -19,7 +19,8 @@
     "passport-facebook": "~1.0.2",
     "passport-google-oauth": "~0.1.5",
     "passport-local": "~0.1.6",
-    "passport-twitter": "~1.0.2"
+    "passport-twitter": "~1.0.2",
+    "request": "^2.60.0"
   },
   "jspm": {
     "directories": {},

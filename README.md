@@ -52,6 +52,7 @@ We are using the dotenv module to set the environment. Simply create a `.env` fi
 * SECRET : Secret for the password encryption (default: enteryoursecrethere)
 * DB_URL : Url to the MongoDB instance (default: mongodb://localhost:27017/inox)
 * PORT : Port of the backend server (default: 8080)
+* EMBEDLY_KEY: API Key for your Embedly Account (defaults: '')
 
 ### Generate test-data
 
