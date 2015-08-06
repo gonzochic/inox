@@ -7,7 +7,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 // app/routes.js
 module.exports = function(passport) {
 
-  router.get('/', function(req, res) {
+  router.get('/', loggedIn,function(req, res) {
       Entry.find({}).sort({issued: 'desc'}).exec(function (err, entries) {
         if (err) {
           res.status(404).send(err);
@@ -17,7 +17,7 @@ module.exports = function(passport) {
       });
   });
 
-  router.get('/:id', function(req, res) {
+  router.get('/:id', loggedIn,function(req, res) {
       Entry.find({'feed' : new ObjectId(req.params.id)}).sort({issued: 'desc'}).exec(function (err, entries) {
         if (err) {
           res.status(404).send(err);
@@ -27,7 +27,7 @@ module.exports = function(passport) {
       });
   });
 
-  router.post('/:id', function(req, res) {
+  router.post('/:id', loggedIn,function(req, res) {
     console.log(req.body);
     var entry = new Entry({
       author: new ObjectId(req.body.author),
@@ -48,7 +48,7 @@ module.exports = function(passport) {
     })
   });
 
-  router.put('/:id/likes',loggedIn, function(req, res) {
+  router.put('/:id/likes', loggedIn, function(req, res) {
       Entry.findOne({'_id' : new ObjectId(req.params.id)}, function (err, entry) {
         if (err) {
           res.status(404).send(err);

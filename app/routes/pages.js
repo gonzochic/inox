@@ -5,7 +5,7 @@ var loggedIn = require('./authentication');
 // app/routes.js
 module.exports = function(passport) {
 
-  router.get('/*', function(req, res) {
+  router.get('/*', loggedIn, function(req, res) {
 
   	var pageToLoad = process.env.IN_PRODUCTION == true ? 'prodpage.ejs' : 'reactpage.ejs'; 
   	console.log(pageToLoad);
