@@ -83,7 +83,7 @@ export default class Feed extends React.Component {
               comments = {entry.comments}
               tags = {entry.tags}
               issued = {entry.issued}
-              showFeedOrigin = {true}
+              showFeedOrigin = {false}
               feedId = {entry.feed}
               feedTitle = {entry.feedName}
               likes = {numberOfLikes}
