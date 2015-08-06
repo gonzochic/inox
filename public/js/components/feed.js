@@ -75,6 +75,7 @@ export default class Feed extends React.Component {
             <Entry
               ref={"entry" + entry._id}
               key={new Date(entry.issued).getTime()}
+              entryId = {entry._id}
               content={entry.content}
               embed={entry.embed}
               authorId= {entry.author}
@@ -82,6 +83,9 @@ export default class Feed extends React.Component {
               comments = {entry.comments}
               tags = {entry.tags}
               issued = {entry.issued}
+              showFeedOrigin = {true}
+              feedId = {entry.feed}
+              feedTitle = {entry.feedName}
               likes = {numberOfLikes}
               likedByUser = {likedByUser}
             />
