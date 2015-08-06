@@ -1,6 +1,8 @@
 import React from 'react';
 import FeedLink from 'public/js/components/feedlink';
 import Avatar from 'public/js/components/avatar'
+import Embed from 'public/js/components/embed';
+
 
 import RestApi from 'public/js/components/restapi';
 import profileData from 'public/js/helper/profiledata';
@@ -36,6 +38,17 @@ export default class Entry extends React.Component {
       );
     }
 
+    const embed = this.props.embed.title ? (
+      <Embed
+        title = {this.props.embed.title}
+        description = {this.props.embed.description}
+        html = {this.props.embed.html}
+        thumbnail = {this.props.embed.thumbnail_url}
+        url = {this.props.embed.url}
+        loading = {false}
+      />
+      ) : null;
+
     return (
       <div className = 'panel panel-default'>
         <div className = 'panel-heading'>
@@ -55,6 +68,7 @@ export default class Entry extends React.Component {
         </div>
         <div className='panel-body'>
           {this.props.content}
+          {embed}
         </div>
         <div className='panel-footer'>
           <div className='row'>
@@ -84,7 +98,8 @@ Entry.propTypes = {
   feedTitle: React.PropTypes.string,
   showFeedOrigin: React.PropTypes.bool,
   likes: React.PropTypes.number,
-  likedByUser: React.PropTypes.bool
+  likedByUser: React.PropTypes.bool,
+  embed: React.PropTypes.object
 }
 
 Entry.defaultProps = {
@@ -99,5 +114,6 @@ Entry.defaultProps = {
   feedTitle: '',
   showFeedOrigin: false,
   likes: 0,
-  likedByUser: false
+  likedByUser: false,
+  embed: {}
 }

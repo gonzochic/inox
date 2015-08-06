@@ -9,13 +9,24 @@ export default class FeedInput extends React.Component {
 
     this.state = {
       comment: '',
-      embed: {}
+      embed: {},
+      embedLoading: false
     };
   }
 
   onButtonClick() {
-    this.props.onCommentSubmit(this.state.comment);
-    this.setState({comment: ''});
+    const commentData = {
+      comment: this.state.comment,
+      embed: this.state.embed,
+    }
+
+    this.props.onCommentSubmit(commentData);
+
+    this.setState({
+      comment: '',
+      embed: {},
+      embedLoading: false
+    });
   }
 
   onInputBlur() {
@@ -24,8 +35,21 @@ export default class FeedInput extends React.Component {
     var linkInInput = httpRegex.exec(this.state.comment);
 
     if(linkInInput) {
+      this.setState({
+        embedLoading: true,
+        embed: {}
+      });
       RestApi.getDataFromUrl('/embeds/' + encodeURIComponent(linkInInput[0]), (data) => {
-        this.setState({embed: data});
+        this.setState({
+          embed: data,
+          embedLoading: false
+        });
+
+      });
+    } else if (this.state.embed.title) {
+      this.setState({
+        embedLoading: false,
+        embed: {}
       });
     }
 
@@ -33,12 +57,13 @@ export default class FeedInput extends React.Component {
 
   render() {
 
-    const embed = this.state.embed.title ?
+    const embed = this.state.embed.title || this.state.embedLoading ?
     (
       <Embed
        title = {this.state.embed.title}
        description = {this.state.embed.description}
        html = {this.state.embed.html}
+       loading = {this.state.embedLoading}
       />
     ) : null;
 

@@ -33,7 +33,8 @@ module.exports = function(passport) {
       author: new ObjectId(req.body.author),
       authorName: req.body.authorName,
       content: req.body.content,
-      feed: req.params.id,
+      embed: req.body.embed,
+      feed: new ObjectId(req.params.id),
       feedName: req.body.feedName,
       tags: [],
       comments: []

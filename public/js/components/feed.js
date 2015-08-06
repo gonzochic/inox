@@ -42,11 +42,12 @@ export default class Feed extends React.Component {
     this.getProfile();
   }
 
-  onCommentSubmit(comment) {
-    console.log(this.state);
+  onCommentSubmit(commentData) {
     RestApi.postDataToUrl('/entries/' + this.feedId, {
-      content: comment,
-      feedName: 'testfeed',
+      content: commentData.comment,
+      embed: commentData.embed,
+      feedId: this.feedId,
+      feedName: this.state.feed.title,
       author: this.state.profileId,
       authorName: this.state.profileName
     }, () => this.getEntries());
@@ -70,12 +71,12 @@ export default class Feed extends React.Component {
         {this.state.entries.map(function(entry) {
           const numberOfLikes = entry.likes.length;
           const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1
-
           return (
             <Entry
               ref={"entry" + entry._id}
               key={new Date(entry.issued).getTime()}
               content={entry.content}
+              embed={entry.embed}
               authorId= {entry.author}
               authorName = {entry.authorName}
               comments = {entry.comments}
