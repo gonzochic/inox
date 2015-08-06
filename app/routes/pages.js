@@ -6,7 +6,11 @@ var loggedIn = require('./authentication');
 module.exports = function(passport) {
 
   router.get('/*', function(req, res) {
-    res.render('reactpage.ejs', {
+
+  	var pageToLoad = process.env.IN_PRODUCTION == true ? 'prodpage.ejs' : 'reactpage.ejs'; 
+  	console.log(pageToLoad);
+
+    res.render(pageToLoad, {
       pagename : 'app' // get the user out of session and pass to template
     });
   });

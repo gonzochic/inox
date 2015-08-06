@@ -52,7 +52,8 @@ We are using the dotenv module to set the environment. Simply create a `.env` fi
 * SECRET : Secret for the password encryption (default: enteryoursecrethere)
 * DB_URL : Url to the MongoDB instance (default: mongodb://localhost:27017/inox)
 * PORT : Port of the backend server (default: 8080)
-* EMBEDLY_KEY: API Key for your Embedly Account (defaults: '')
+* EMBEDLY_KEY: API Key for your Embedly Account (default: '')
+* IN_PRODMODE: Pages will consume bundled React component. You have to create bundle to be able to use this mode (default: '0');
 
 ### Generate test-data
 
