@@ -62,5 +62,9 @@ When you are developing the project it might be useful the create some dummy tes
 $ node setupDB.js
 ```
 
+### Example
+
+[Here](http://46.101.232.18:8080/) is an example of the current state of the project. *Be aware that I'm not using https at the moment, so please use some kind of dummy password*
+
 ### License
 Gnu GPL V2
