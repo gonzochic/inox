@@ -8,7 +8,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 module.exports = function(passport) {
 
   router.get('/', loggedIn,function(req, res) {
-      Entry.find({}).sort({issued: 'desc'}).limit(15).exec(function (err, entries) {
+      Entry.find({}).sort({"_id": 'desc'}).limit(15).exec(function (err, entries) {
         if (err) {
           res.status(404).send(err);
         }
@@ -18,7 +18,7 @@ module.exports = function(passport) {
   });
 
   router.get('/more/:lastentry', loggedIn,function(req, res) {
-      Entry.find({ "_id": { "$lt": req.params.lastentry }}).sort({issued: 'desc'}).limit(15).exec(function (err, entries) {
+      Entry.find({ "_id": { "$lt": req.params.lastentry }}).sort({"_id": 'desc'}).limit(15).exec(function (err, entries) {
         if (err) {
           res.status(404).send(err);
         }
@@ -29,7 +29,7 @@ module.exports = function(passport) {
     });
 
   router.get('/:feed', loggedIn,function(req, res) {
-      Entry.find({'feed' : new ObjectId(req.params.feed)}).sort({issued: 'desc'}).limit(15).exec(function (err, entries) {
+      Entry.find({'feed' : new ObjectId(req.params.feed)}).sort({"_id": 'desc'}).limit(15).exec(function (err, entries) {
         if (err) {
           res.status(404).send(err);
         }
@@ -37,6 +37,20 @@ module.exports = function(passport) {
 
       });
   });
+
+  router.get('/:feed/more/:lastentry', loggedIn,function(req, res) {
+      Entry.find({$and :[
+        {'feed' : new ObjectId(req.params.feed)},
+        {'_id' : { "$lt": req.params.lastentry }}
+      ]}).sort({"_id": 'desc'}).limit(15).exec(function (err, entries) {
+        if (err) {
+          res.status(404).send(err);
+        }
+        res.send(entries);
+
+      });
+  });
+
 
   router.post('/:id', loggedIn,function(req, res) {
     console.log(req.body);

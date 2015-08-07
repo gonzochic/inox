@@ -1,17 +1,18 @@
 import React from 'react';
-import RestApi from 'public/js/components/restapi';
-import Entry from 'public/js/components/entry';
-import FeedInput from 'public/js/components/feedinput';
-import FeedHeader from 'public/js/components/feedheader';
 
-import profileData from 'public/js/helper/profiledata'
+
+import EntryList from 'public/js/components/entrylist';
+import FeedHeader from 'public/js/components/feedheader';
+import FeedInput from 'public/js/components/feedinput';
+
+import profileData from 'public/js/helper/profiledata';
+import RestApi from 'public/js/components/restapi';
 
 export default class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.feedId = '';
     this.state = {
-        entries: [],
         feed:{},
         profileName: '',
         profileId: ''
@@ -25,11 +26,6 @@ export default class Feed extends React.Component {
       });
   }
 
-  getEntries() {
-    RestApi.getDataFromUrl('/entries/' + this.feedId,
-    (data) => this.setState({entries: data }));
-  }
-
   getFeedInformation() {
     RestApi.getDataFromUrl('/feeds/' + this.feedId,
       (data) => this.setState({feed: data}));
@@ -38,7 +34,6 @@ export default class Feed extends React.Component {
   componentWillMount() {
     this.feedId = this.props.params.id;
     this.getFeedInformation();
-    this.getEntries();
     this.getProfile();
   }
 
@@ -68,29 +63,10 @@ export default class Feed extends React.Component {
           onCommentSubmit={this.onCommentSubmit.bind(this)}
         />
 
-        {this.state.entries.map(function(entry) {
-          const numberOfLikes = entry.likes.length;
-          const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1
-          return (
-            <Entry
-              ref={"entry" + entry._id}
-              key={new Date(entry.issued).getTime()}
-              entryId = {entry._id}
-              content={entry.content}
-              embed={entry.embed}
-              authorId= {entry.author}
-              authorName = {entry.authorName}
-              comments = {entry.comments}
-              tags = {entry.tags}
-              issued = {entry.issued}
-              showFeedOrigin = {false}
-              feedId = {entry.feed}
-              feedTitle = {entry.feedName}
-              likes = {numberOfLikes}
-              likedByUser = {likedByUser}
-            />
-          );
-        })}
+        <EntryList
+          restEndpoint={'/entries/' + this.feedId}
+          showFeedOrigin = {false}
+        />
       </div>
     )
   }
