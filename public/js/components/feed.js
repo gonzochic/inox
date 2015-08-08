@@ -45,7 +45,7 @@ export default class Feed extends React.Component {
       feedName: this.state.feed.title,
       author: this.state.profileId,
       authorName: this.state.profileName
-    }, () => this.getEntries());
+    }, () => console.log("Here we should reload new entries"));
   }
 
   render() {
