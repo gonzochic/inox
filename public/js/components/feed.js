@@ -45,7 +45,7 @@ export default class Feed extends React.Component {
       feedName: this.state.feed.title,
       author: this.state.profileId,
       authorName: this.state.profileName
-    }, () => console.log("Here we should reload new entries"));
+    }, () => this.refs.entryList.fetchNewerEntries());
   }
 
   render() {
@@ -64,6 +64,7 @@ export default class Feed extends React.Component {
         />
 
         <EntryList
+          ref="entryList"
           restEndpoint={'/entries/' + this.feedId}
           showFeedOrigin = {false}
         />

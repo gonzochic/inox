@@ -9,6 +9,7 @@ import RestApi from 'public/js/components/restapi';
 export default class EntryList extends React.Component {
   constructor(props) {
     super(props);
+    this.firstEntryId = '';
     this.lastEntryId = '';
     this.state = {
       entries: [],
@@ -16,22 +17,54 @@ export default class EntryList extends React.Component {
     };
   }
 
-  fetchAdditionalEntries() {
+  fetchNewerEntries() {
     this.setState({showLoader: true});
-    RestApi.getDataFromUrl(this.props.restEndpoint + '/more/' + this.lastEntryId,
+    RestApi.getDataFromUrl(this.props.restEndpoint + '/newer/' + this.firstEntryId,
       (data) => {
         if (data.length < 1) {
           this.setState({showLoader:false});
           return;
         }
 
-        let newData = this.state.entries;
-        data.forEach((entry) => {
-          newData.push(entry);
+        this.firstEntryId = data[0]._id;
+        this.setState({
+          entries: data.concat(this.state.entries),
+          showLoader: false
         });
+    });
+
+  }
+
+  fetchEntries() {
+    RestApi.getDataFromUrl(this.props.restEndpoint,
+      (data) => {
+        this.setState({
+          entries: data,
+          showLoader: false,
+        })
+
+        if (data.length  < 1) {
+          return;
+        }
+
+        this.firstEntryId = data[0]._id;
+        this.lastEntryId = data[data.length-1]._id;
+
+    });
+  }
+
+  fetchAdditionalEntries() {
+    this.setState({showLoader: true});
+    RestApi.getDataFromUrl(this.props.restEndpoint + '/older/' + this.lastEntryId,
+      (data) => {
+        if (data.length < 1) {
+          this.setState({showLoader:false});
+          return;
+        }
+
         this.lastEntryId = data[data.length-1]._id;
         this.setState({
-          entries: newData,
+          entries: this.state.entries.concat(data),
           showLoader: false
         });
     });
@@ -51,19 +84,8 @@ export default class EntryList extends React.Component {
 
   componentDidMount() {
     this.setState({showLoader: true});
-
-    RestApi.getDataFromUrl(this.props.restEndpoint,
-      (data) => {
-        this.setState({
-          entries: data,
-          showLoader: false,
-        })
-        this.lastEntryId = data[data.length-1]._id;
-
-    });
-
+    this.fetchEntries();
     $(window).on('scroll', this.onScroll.bind(this));
-
   }
 
   render() {
@@ -76,7 +98,6 @@ export default class EntryList extends React.Component {
 
           return (
             <Entry
-              ref={"entry" + entry._id}
               key={entry._id}
               entryId = {entry._id}
               content={entry.content}

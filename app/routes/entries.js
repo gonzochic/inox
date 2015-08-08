@@ -13,18 +13,24 @@ module.exports = function(passport) {
           res.status(404).send(err);
         }
         res.send(entries);
-
       });
   });
 
-  router.get('/more/:lastentry', loggedIn,function(req, res) {
+  router.get('/newer/:firstentry', loggedIn,function(req, res) {
+      Entry.find({ "_id": { "$gt": req.params.firstentry }}).sort({"_id": 'desc'}).exec(function (err, entries) {
+        if (err) {
+          res.status(404).send(err);
+        }
+        res.send(entries);
+      });
+    });
+
+  router.get('/older/:lastentry', loggedIn,function(req, res) {
       Entry.find({ "_id": { "$lt": req.params.lastentry }}).sort({"_id": 'desc'}).limit(15).exec(function (err, entries) {
         if (err) {
           res.status(404).send(err);
         }
-
         res.send(entries);
-
       });
     });
 
@@ -34,11 +40,22 @@ module.exports = function(passport) {
           res.status(404).send(err);
         }
         res.send(entries);
-
       });
   });
 
-  router.get('/:feed/more/:lastentry', loggedIn,function(req, res) {
+  router.get('/:feed/newer/:firstentry', loggedIn,function(req, res) {
+      Entry.find({$and :[
+        {'feed' : new ObjectId(req.params.feed)},
+        {'_id' : { "$gt": req.params.firstentry }}
+      ]}).sort({"_id": 'desc'}).exec(function (err, entries) {
+        if (err) {
+          res.status(404).send(err);
+        }
+        res.send(entries);
+      });
+  });
+
+  router.get('/:feed/older/:lastentry', loggedIn,function(req, res) {
       Entry.find({$and :[
         {'feed' : new ObjectId(req.params.feed)},
         {'_id' : { "$lt": req.params.lastentry }}
