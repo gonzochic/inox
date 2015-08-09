@@ -7,7 +7,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 // app/routes.js
 module.exports = function(passport) {
 
-  router.get('/', loggedIn,function(req, res) {
+  router.get('/',function(req, res) {
       Entry.find({}).sort({"_id": 'desc'}).limit(15).exec(function (err, entries) {
         if (err) {
           res.status(404).send(err);

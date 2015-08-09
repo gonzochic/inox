@@ -35,7 +35,8 @@ var userSchema = mongoose.Schema({
         type: String,
         default: 'public/img/default_avatar.png'
       },
-      friends: Array,
+      follows: {type: Array, default: []},
+      follower: {type: Array, default: []},
       posts: Number
     }
 
