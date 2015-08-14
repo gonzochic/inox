@@ -6,9 +6,9 @@ var pagesRoute = require('./routes/pages');
 var profileRoute = require('./routes/profiles');
 var embedsRoute = require('./routes/embeds');
 var followersRoute = require('./routes/followers');
+var followsRoute = require('./routes/follows');
 
 module.exports = function(app, passport) {
-
   app.use('/', loginRoute(passport));
   app.use('/entries', entriesRoute(passport));
   app.use('/feeds', feedsRoute(passport));
@@ -16,5 +16,5 @@ module.exports = function(app, passport) {
   app.use('/profiles',profileRoute(passport));
   app.use('/embeds',embedsRoute(passport));
   app.use('/followers', followersRoute(passport));
-
+  app.use('/follows', followsRoute(passport));
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import FeedLink from 'public/js/components/feedlink';
 import Avatar from 'public/js/components/avatar'
 import Embed from 'public/js/components/embed';
+import FollowLink from 'public/js/components/followLink';
 
 
 import RestApi from 'public/js/components/restapi';
@@ -59,6 +60,11 @@ export default class Entry extends React.Component {
                   <Avatar name={this.props.authorName} />
                   {this.props.authorName}
                 </a>
+                <FollowLink
+                  followerId={this.props.authorId}
+                  userIsFollowing = {this.props.userIsFollowing}
+                  onFollowClick = {this.props.onFollowClick}
+                />
               </label>
             </div>
             <div className="col-xs-6">
@@ -99,7 +105,9 @@ Entry.propTypes = {
   showFeedOrigin: React.PropTypes.bool,
   likes: React.PropTypes.number,
   likedByUser: React.PropTypes.bool,
-  embed: React.PropTypes.object
+  embed: React.PropTypes.object,
+  userIsFollowing: React.PropTypes.bool,
+  onFollowClick: React.PropTypes.func
 }
 
 Entry.defaultProps = {

@@ -13,8 +13,17 @@ export default class EntryList extends React.Component {
     this.lastEntryId = '';
     this.state = {
       entries: [],
-      showLoader: false
+      showLoader: false,
+      followsOfUser: [],
     };
+  }
+
+  fetchFollows() {
+    RestApi.getDataFromUrl('/follows',
+      (follows) => {
+        this.setState({followsOfUser:follows});
+      }
+    )
   }
 
   fetchNewerEntries() {
@@ -85,6 +94,7 @@ export default class EntryList extends React.Component {
   componentDidMount() {
     this.setState({showLoader: true});
     this.fetchEntries();
+    this.fetchFollows();
     $(window).on('scroll', this.onScroll.bind(this));
   }
 
@@ -94,7 +104,8 @@ export default class EntryList extends React.Component {
       <div>
         {this.state.entries.map((entry) => {
           const numberOfLikes = entry.likes.length;
-          const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1
+          const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1;
+          const userIsFollowing = this.state.followsOfUser.indexOf(profileData.profile._id) > -1;
 
           return (
             <Entry
@@ -112,6 +123,8 @@ export default class EntryList extends React.Component {
               feedTitle = {entry.feedName}
               likes = {numberOfLikes}
               likedByUser = {likedByUser}
+              userIsFollowing = {userIsFollowing}
+              onFollowClick = {() => this.fetchFollows()}
             />
           );
         })}

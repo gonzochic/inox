@@ -3,6 +3,9 @@ var router = express.Router();
 var loggedIn = require('./rest-authentication');
 var User = require('../models/user');
 
+var ObjectId = require('mongoose').Types.ObjectId;
+
+
 module.exports = function(passport) {
 
   router.get('/:userid', loggedIn, function(req, res) {
@@ -21,20 +24,20 @@ module.exports = function(passport) {
         if (err) {
           res.status(404).send(err);
         }
-        var targetWasAllreadyFollowed = target.follower.indexOf(requesterId) > -1;
+        var targetWasAllreadyFollowed = target.profile.follower.indexOf(requesterId) > -1;
 
         if (!targetWasAllreadyFollowed) {
           User.findOne({'_id': requesterId}, function (err, requester) {
             if(err) {
               res.status(404).send(err);
             }
-            var  requesterIsAllreadyFollowing = requester.follows.indexOf(followTarget) > -1;
-            if(requesterIsAllreadyFollowing) {
-              user.follower.push(requesterId);
-              requester.follows.push(req.params._id);
+            var  requesterIsAllreadyFollowing = requester.profile.follows.indexOf(followTarget) > -1;
+            if(!requesterIsAllreadyFollowing) {
+              target.profile.follower.push(requesterId.toString());
+              requester.profile.follows.push(followTarget);
 
-              user.save();
-              request.save();
+              target.save();
+              requester.save();
             }
 
           });
