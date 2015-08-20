@@ -105,7 +105,7 @@ export default class EntryList extends React.Component {
         {this.state.entries.map((entry) => {
           const numberOfLikes = entry.likes.length;
           const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1;
-          const userIsFollowing = this.state.followsOfUser.indexOf(profileData.profile._id) > -1;
+          const userIsFollowing = this.state.followsOfUser.indexOf(entry.author) > -1;
 
           return (
             <Entry

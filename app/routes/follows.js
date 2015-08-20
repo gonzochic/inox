@@ -6,20 +6,20 @@ var User = require('../models/user');
 module.exports = function(passport) {
 
   router.get('/', loggedIn, function(req, res) {
-      User.find({'_id': req.user._id}, {'follows': 1}, function (err, follows) {
+      User.findOne({'_id': req.user._id}, {'profile.follows': 1}, function (err, user) {
         if (err) {
           res.status(404).send(err);
         }
-        res.send(follows);
+        res.send(user.profile.follows);
       });
   });
 
   router.get('/:userid', loggedIn, function(req, res) {
-      User.find({'_id': req.params.id}, {'follows': 1}, function (err, follows) {
+      User.findOne({'_id': req.params.id}, {'profile.follows': 1}, function (err, user) {
         if (err) {
           res.status(404).send(err);
         }
-        res.send(follows);
+        res.send(user.profile.follows);
       });
   });
 

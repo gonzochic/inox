@@ -20,6 +20,13 @@ module.exports = function(passport) {
   router.post('/:userid',loggedIn, function(req, res) {
       var followTarget = req.params.userid;
       var requesterId = req.user._id;
+
+      if(followTarget == requesterId) {
+        console.log("cant follow myself");
+        res.send({});
+        return;
+      }
+
       User.findOne({'_id': followTarget}, function (err, target) {
         if (err) {
           res.status(404).send(err);
@@ -33,8 +40,8 @@ module.exports = function(passport) {
             }
             var  requesterIsAllreadyFollowing = requester.profile.follows.indexOf(followTarget) > -1;
             if(!requesterIsAllreadyFollowing) {
-              target.profile.follower.push(requesterId.toString());
-              requester.profile.follows.push(followTarget);
+              target.profile.follower.push(requesterId);
+              requester.profile.follows.push(new ObjectId(followTarget));
 
               target.save();
               requester.save();
