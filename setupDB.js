@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var configDB = require('./config/database.js');
 var Feed = require('./app/models/feed');
 var Entry = require('./app/models/entry');
+var User = require('./app/models/user');
 var faker = require('faker');
 
 mongoose.connect(configDB.url);
@@ -21,16 +22,28 @@ for (var i= 0; i < 5; i++) {
   feed.save(function(err, savedFeed) {
 
     for (var j= 0; j < 30; j++) {
-      var entry = new Entry({
-        authorName: faker.internet.userName(),
-        content: faker.lorem.paragraphs(),
-        feed: savedFeed._id,
-        feedName: savedFeed.title,
-        issued: faker.date.past(),
-        tags: ["foo", "bar"],
-        comments: ["first comment", "second comment"]
+
+      var user = new User({
+        local: {
+          username: faker.internet.userName(),
+          email: faker.internet.email(),
+          password: faker.internet.password(),
+          }
       });
-      entry.save();
+
+      user.save(function(err, savedUser) {
+        var entry = new Entry({
+          author: savedUser._id,
+          authorName: savedUser.local.username,
+          content: faker.lorem.paragraphs(),
+          feed: savedFeed._id,
+          feedName: savedFeed.title,
+          issued: faker.date.past(),
+          tags: ["foo", "bar"],
+          comments: ["first comment", "second comment"]
+        });
+        entry.save();
+      });
     }
   });
 }
