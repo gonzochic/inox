@@ -101,36 +101,38 @@ export default class EntryList extends React.Component {
   render() {
     const loader = this.state.showLoader ? <AjaxLoader /> : null;
     return (
-      <div>
-        {this.state.entries.map((entry) => {
-          const numberOfLikes = entry.likes.length;
-          const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1;
-          const userIsFollowing = this.state.followsOfUser.indexOf(entry.author) > -1;
+					<div className="timeline">
+						<div className="timeline-hline">
+            </div>
+            {this.state.entries.map((entry) => {
+              const numberOfLikes = entry.likes.length;
+              const likedByUser = entry.likes.indexOf(profileData.profile._id) > -1;
+              const userIsFollowing = this.state.followsOfUser.indexOf(entry.author) > -1;
 
-          return (
-            <Entry
-              key={entry._id}
-              entryId = {entry._id}
-              content={entry.content}
-              embed = {entry.embed}
-              authorId= {entry.author}
-              authorName = {entry.authorName}
-              comments = {entry.comments}
-              tags = {entry.tags}
-              issued = {entry.issued}
-              showFeedOrigin = {this.props.showFeedOrigin}
-              feedId = {entry.feed}
-              feedTitle = {entry.feedName}
-              likes = {numberOfLikes}
-              likedByUser = {likedByUser}
-              userIsFollowing = {userIsFollowing}
-              onFollowClick = {() => this.fetchFollows()}
-            />
-          );
-        })}
-        {loader}
-      </div>
-    )
+              return (
+                <Entry
+                key={entry._id}
+                entryId = {entry._id}
+                content={entry.content}
+                embed = {entry.embed}
+                authorId= {entry.author}
+                authorName = {entry.authorName}
+                comments = {entry.comments}
+                tags = {entry.tags}
+                issued = {entry.issued}
+                showFeedOrigin = {this.props.showFeedOrigin}
+                feedId = {entry.feed}
+                feedTitle = {entry.feedName}
+                likes = {numberOfLikes}
+                likedByUser = {likedByUser}
+                userIsFollowing = {userIsFollowing}
+                onFollowClick = {() => this.fetchFollows()}
+                />
+              );
+            })}
+            {loader}
+          </div>
+        )
 
   }
 }

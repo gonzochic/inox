@@ -24,11 +24,29 @@ export default class Overview extends React.Component {
   render() {
 
     return (
-      <div className='col-xs-12'>
-        <h1>Overview</h1>
-        <FeedList feeds={this.state.feeds} />
-        <EntryList />
+      <div>
+        <section className="page-header dark page-header-xs">
+  				<div className="container">
 
+  					<h1>Overview</h1>
+  					<span className="font-lato size-18 weight-300 hidden-xs">We believe in Simple &amp; Creative</span>
+
+  					<ol className="breadcrumb">
+  						<li><a href="#">Home</a></li>
+  						<li className='active'><a href="#">Overview</a></li>
+  					</ol>
+  			  </div>
+  			</section>
+        <section>
+          <div className='row'>
+            <div className = 'col-sm-9'>
+              <EntryList />
+            </div>
+            <div className = 'col-sm-3'>
+              <FeedList feeds={this.state.feeds} />
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

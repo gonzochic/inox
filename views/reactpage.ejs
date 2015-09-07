@@ -5,27 +5,33 @@
     <title>Node Authentication</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
     <link rel="stylesheet" href="/public/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="/public/css/font-awesome.min.css"> <!-- load fontawesome -->
+
     <script src="/public/js/jquery.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
+  
+    <link href="/public/css/essentials.css" rel="stylesheet" type="text/css" />
+		<link href="/public/css/layout.css" rel="stylesheet" type="text/css" />
+
+		<!-- PAGE LEVEL SCRIPTS -->
+		<link href="/public/css/header-1.css" rel="stylesheet" type="text/css" />
+		<link href="/public/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
     <script src="../jspm_packages/system.js"></script>
     <script src="../public/js/config.js"></script>
-    <style>
-        body        { padding-top:80px; }
-    </style>
 </head>
-<body>
-<div class="container">
+<body class="enable-animation">
+
   <div id="react-content">
   </div>
-
-</div>
 
   <script>
     System['import']('public/js/components/<%= pagename %>')
   </script>
+  <!-- JAVASCRIPT FILES -->
+  <script type="text/javascript">var plugin_path = '/public/plugins/';</script>
+  <script type="text/javascript" src="/public/js/scripts.js"></script>
 
 </body>
 </html>

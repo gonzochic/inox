@@ -31,6 +31,6 @@ Avatar.propTypes = {
 
 Avatar.defaultProps = {
   size: '20px',
-  source: '/public/img/default_avatar.png',
+  source: '/public/images/avatar2.jpg',
   name: 'Avatar',
 }

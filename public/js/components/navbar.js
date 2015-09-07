@@ -8,31 +8,36 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-default navbar-fixed-top">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
+      <div id="header" className="sticky clearfix header-md">
+        <header id="topNav">
+          <div className="container">
+            <button className="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+              <i className="fa fa-bars"></i>
             </button>
-            <a className="navbar-brand" href="/pages/#/overview">INOX</a>
-          </div>
 
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a href={"/pages/#/profiles/" + this.props.profileId}>
-                  <Avatar name={this.props.profileName} />
-                  {this.props.profileName}
-                </a>
-              </li>
-              <li><a href="/logout">Logout</a></li>
-            </ul>
+            <a className="logo pull-left" href="/pages/#/overview">
+              INOX
+            </a>
+
+            <div className="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+							<nav className="nav-main">
+								<ul id="topMain" className="nav nav-pills nav-main">
+									<li>
+                    <a href={"/pages/#/profiles/" + this.props.profileId}>
+                      <Avatar name={this.props.profileName} />
+                      {this.props.profileName}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/logout">Logout</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
           </div>
-        </div>
-      </nav>
+        </header>
+      </div>
     )
   }
 }

@@ -3,6 +3,7 @@
   "main": "server.js",
   "describtion": "INOX is a social media plattform in a twitter like style to allow creative and innovative people to exchange their knowledge and get connected",
   "dependencies": {
+    "async": "^1.4.2",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
     "connect-flash": "~0.1.1",

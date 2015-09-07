@@ -8,12 +8,15 @@ export default class FeedLink extends React.Component {
 
   render() {
     return(
-      <span className='label label-warning'>
+      <li className="list-group-item">
         <Link
           to={"/entries/" + this.props.feedId}>
+          <span className="size-11 text-muted pull-right">
+            {(0)}
+          </span>
           {this.props.feedTitle}
         </Link>
-      </span>
+      </li>
     );
   }
 }

@@ -51,43 +51,42 @@ export default class Entry extends React.Component {
       ) : null;
 
     return (
-      <div className = 'panel panel-default'>
-        <div className = 'panel-heading'>
-          <div className="row">
-            <div className="col-xs-6">
-              <label className="pull-left">
-                <a href = {'/pages/#/profiles/' + this.props.authorId}>
-                  <Avatar name={this.props.authorName} />
-                  {this.props.authorName}
-                </a>
-                <FollowLink
-                  followerId={this.props.authorId}
-                  userIsFollowing = {this.props.userIsFollowing}
-                  onFollowClick = {this.props.onFollowClick}
-                />
-              </label>
-            </div>
-            <div className="col-xs-6">
-              <label className="pull-right">{new Date(this.props.issued).toUTCString()}</label>
-            </div>
-          </div>
+      <div className="blog-post-item">
+        <div className="timeline-entry rounded">
+          <Avatar name={this.props.authorName} />
         </div>
-        <div className='panel-body'>
-          {this.props.content}
-          {embed}
-        </div>
-        <div className='panel-footer'>
-          <div className='row'>
-            <div className='col-xs-12'>
-              <span className='pull-left'>
-                Likes: {this.state.likes}
-                <button onClick={() => this.onLikeClick()} disabled={this.state.likedByUser}> Like </button>
-              </span>
-              {feedOrigin}
-            </div>
-          </div>
-        </div>
+
+        <h2>{this.props.authorName}</h2>
+
+        <p>{this.props.content}</p>
+
+        <figure className="margin-bottom-20">
+         {embed}
+        </figure>
+
+        <ul className="blog-post-info list-inline">
+          <li>
+            <a href="#">
+              <i className="fa fa-clock-o"></i>
+              <span className="font-lato">{new Date(this.props.issued).toUTCString()}</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i className="fa fa-comment-o"></i>
+              <span className="font-lato">28 Comments</span>
+            </a>
+          </li>
+          {feedOrigin}
+          <li>
+            <a href={'/pages/#/profiles/' + this.props.authorId}>
+              <i className="fa fa-user"></i>
+              <span className="font-lato">{this.props.authorName}</span>
+            </a>
+          </li>
+        </ul>
       </div>
+
     );
   }
 }

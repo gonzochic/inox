@@ -8,25 +8,26 @@ export default class FeedList extends React.Component {
 
   render() {
     return (
-          <div className="panel panel-default">
-            <div className="panel-body">
-              <div className="row">
-                {
-                  this.props.feeds.map(function(feed) {
-                    return (
-                      <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <FeedLink
-                          key={feed._id}
-                          feedId={feed._id}
-                          feedTitle= {feed.title}
-                        />
-                      </div>
-                    );
-                  })
-                }
-              </div>
-            </div>
-          </div>
+      <div className="side-nav margin-bottom-60 margin-top-30">
+
+        <div className="side-nav-head">
+          <button className="fa fa-bars"></button>
+          <h4>FEEDS</h4>
+        </div>
+        <ul className="list-group list-group-bordered list-group-noicon uppercase">
+        {
+          this.props.feeds.map(function(feed) {
+            return (
+              <FeedLink
+                key={feed._id}
+                feedId={feed._id}
+                feedTitle={feed.title}
+              />
+            );
+          })
+        }
+        </ul>
+      </div>
     );
   }
 }

@@ -28,7 +28,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id={'wrapper'}>
         <Navbar
           profileName={this.state.profileName}
           profileId = {this.state.profileId}
