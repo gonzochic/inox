@@ -2,7 +2,7 @@ import React from 'react';
 import FeedLink from 'public/js/components/feedlink';
 import Avatar from 'public/js/components/avatar'
 import Embed from 'public/js/components/embed';
-import FollowLink from 'public/js/components/followLink';
+import FollowLink from 'public/js/components/followlink';
 
 
 import RestApi from 'public/js/components/restapi';
